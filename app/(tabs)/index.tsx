@@ -1,13 +1,23 @@
 import { CameraView, CameraType, useCameraPermissions, CameraMode } from 'expo-camera';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import * as Brightness from 'expo-brightness';
 import * as MediaLibrary from 'expo-media-library';
 
 import { getLocales, getCalendars } from 'expo-localization';
 import ModalCom from '@/components/ModalCom';
+import { useFocusEffect } from 'expo-router';
 
 export default function HomeScreen() {
+  useFocusEffect(
+    useCallback(() => {
+      setActive(true);
+      return () => {
+        setActive(false);
+      };
+    }, [])
+  );
+
   const [facing, setFacing] = useState<CameraType>('back');
   const [permission, requestPermission] = useCameraPermissions();
   const [index, setIndex] = useState<any>(0);
@@ -82,6 +92,8 @@ export default function HomeScreen() {
 
   const { calendar, timeZone, uses24hourClock, firstWeekday } = getCalendars()[0];
 
+  const [active, setActive] = useState(true);
+
   if (!permission) {
     // Camera permissions are still loading.
     return <View />;
@@ -107,6 +119,7 @@ export default function HomeScreen() {
         },
       ]}>
       <CameraView
+        active={active}
         style={[
           styles.camera,
           {

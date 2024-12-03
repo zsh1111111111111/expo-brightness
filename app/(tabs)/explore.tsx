@@ -1,5 +1,5 @@
 import { CameraView, CameraType, useCameraPermissions, CameraMode } from 'expo-camera';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import {
   Button,
   StyleSheet,
@@ -15,8 +15,17 @@ import * as MediaLibrary from 'expo-media-library';
 
 import { getLocales, getCalendars } from 'expo-localization';
 import ImageModalCom from '@/components/ImageModal';
+import { useFocusEffect } from 'expo-router';
 
 export default function HomeScreen() {
+  useFocusEffect(
+    useCallback(() => {
+      setActive(true);
+      return () => {
+        setActive(false);
+      };
+    }, [])
+  );
   const [facing, setFacing] = useState<CameraType>('back');
   const [permission, requestPermission] = useCameraPermissions();
   const [cameraShow, setCameraShow] = useState(false);
@@ -71,6 +80,7 @@ export default function HomeScreen() {
 
   const { calendar, timeZone, uses24hourClock, firstWeekday } = getCalendars()[0];
   const addImage = () => {};
+  const [active, setActive] = useState(true);
 
   const [imagesShow, setImagesShow] = useState(false);
   const [imageModalShow, setImagesModalShow] = useState(false);
@@ -123,6 +133,7 @@ export default function HomeScreen() {
           position: 'relative',
         }}>
         <CameraView
+          active={active}
           style={[{ width: '100%', height: '100%' }]}
           facing={facing}
           ref={CameraViewRef}

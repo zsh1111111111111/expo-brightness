@@ -52,8 +52,7 @@
           "isAccessMediaLocationEnabled": true
         }
       ],
-      "expo-localization",
-      "react-native-vision-camera"
+      "expo-localization"
     ],
     "experiments": {
       "typedRoutes": true
