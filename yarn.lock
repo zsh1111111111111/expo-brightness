@@ -3364,6 +3364,11 @@ expo-linking@~7.0.3:
     expo-constants "~17.0.0"
     invariant "^2.2.4"
 
+expo-live-photo@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.npmmirror.com/expo-live-photo/-/expo-live-photo-0.0.1.tgz#ccd691357fd124686f0b6587341128831b9a5bee"
+  integrity sha512-ppzDnfolDOHe7pxs5PiFii+ydLIis+2CFvntaZw08WTZNLFq3NKgQaM4px8gCGMCNTB67eiAtM6f8l9h3HT2Ow==
+
 expo-localization@~16.0.0:
   version "16.0.0"
   resolved "https://registry.npmmirror.com/expo-localization/-/expo-localization-16.0.0.tgz#fe426550649b6a8ea26876f26c065e5dcf6d5bb9"
